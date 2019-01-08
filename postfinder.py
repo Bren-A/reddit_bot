@@ -13,11 +13,12 @@ import os.path
 from client import reddit
 
 # Variable that sets the subreddit that the api will work in
-sub = reddit.subreddit('frugalmalefashion')
+sub = 'frugalmalefashion'
 
 # Comment has to contain this phrase to activate bot
-keyword = ''
+keyword = 'off'
 
-for post in sub.new(limit=10):
-	print(post.title)
-	print('----------------')
+for post in reddit.subreddit(sub).new(limit=10):
+	if keyword in post.title.lower() :
+		print(post.title)
+		print('----------------')
