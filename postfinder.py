@@ -12,13 +12,19 @@ import os.path
 
 from client import reddit
 
-# Variable that sets the subreddit that the api will work in
-sub = 'frugalmalefashion'
+# Access user request
+x = input("Test string:")
 
-# Comment has to contain this phrase to activate bot
-keyword = 'off'
+comment = x.split(' ')
 
-for post in reddit.subreddit(sub).new(limit=10):
-	if keyword in post.title.lower() :
+if comment[0].lower() == '!findpost' and len(comment) > 2:
+	# Variable that sets the subreddit that the api will work in
+	sub = comment[1].lower()
+	
+	# Comment has to contain this phrase to activate bot
+	keyword = comment[2].lower()
+
+for post in reddit.subreddit(sub).new(limit=100):
+	if keyword in post.title.lower() : # Lowercase removes case sensitivity 
 		print(post.title)
 		print('----------------')
